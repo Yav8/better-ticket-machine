@@ -101,14 +101,22 @@ public class TicketMachine
     }
     
     /**
-     * Vacía y devuelve el dinero de la máquina.
+     * Vacía y devuelve el dinero de la máquina,
+     * sólo si no hay nadie que esté metiendo dinero.
      */
-    public int emptyMachine() 
+    public int emptyMachine()
     {
         int devolucionTotalDeDinero;
-        devolucionTotalDeDinero = balance + total;
-        balance = 0;
-        total = 0;
+        if(balance == 0)
+        {
+            devolucionTotalDeDinero = total;
+            total = 0;
+        }
+        else 
+        {
+            System.out.println("ERROR: La máquina tiene una operación en curso, imposible vaciar la máquina en este momento.");
+            devolucionTotalDeDinero = -1;
+        }
         return devolucionTotalDeDinero;
     }
 }
